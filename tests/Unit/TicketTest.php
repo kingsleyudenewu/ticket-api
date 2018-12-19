@@ -46,11 +46,10 @@ class TicketTest extends TestCase
     public function testTicketUpdate(){
         $response = $this->withHeaders([
             'Content-Type' => $this->header['Accept']
-        ])->json('PUT', 'api/v1/ticket/'.$this->ticket->id, ['code' => $this->ticket->name, 'ticket_type_id' => $this->ticket->ticket_type_id]);
+        ])->json('PUT', 'api/v1/ticket/'.$this->ticket->id, ['code' => $this->ticket->code, 'ticket_type_id' => $this->ticket->ticket_type_id]);
 
         $response->assertStatus(200)->assertJsonFragment([
-            'status' => 'error',
-            'data' => null
+            'status' => 'success'
         ]);
     }
 }

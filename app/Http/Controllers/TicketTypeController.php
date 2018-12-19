@@ -94,15 +94,4 @@ class TicketTypeController extends Controller
             $this->errorResponse('Operation failed');
         }
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\TicketType  $ticketType
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(TicketType $ticketType)
-    {
-        //
-    }
 }
