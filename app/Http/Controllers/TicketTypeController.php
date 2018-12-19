@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Ticket;
+use App\TicketType;
 use Illuminate\Http\Request;
 use Validator;
 
-class TicketController extends Controller
+class TicketTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class TicketController extends Controller
      */
     public function index()
     {
-        return $this->successResponse('success', Ticket::paginate($this->perPage));
+        return $this->successResponse('success', TicketType::paginate($this->perPage));
     }
 
     /**
@@ -27,8 +27,7 @@ class TicketController extends Controller
     public function store(Request $request)
     {
         $validate = Validator::make($request->all(), [
-            'code' => 'required|string',
-            'ticket_type_id' => 'required|integer'
+            'name' => 'required|string'
         ]);
 
         if($validate->fails())
@@ -38,14 +37,11 @@ class TicketController extends Controller
 
         try{
             $payload = [
-                'code' => $request->input('code'),
-                'ticket_type_id' => $request->input('ticket_type_id')
+                'name' => $request->input('name')
             ];
 
-            $saveTicketType = Ticket::create($payload);
-            if($saveTicketType){
-                return $this->successResponse("success");
-            }
+            $saveTicketType = TicketType::create($payload);
+            if($saveTicketType) return $this->successResponse("Ticket Type created");
 
             return $this->errorResponse("Ticket not created");
         }
@@ -57,26 +53,26 @@ class TicketController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Ticket  $ticket
+     * @param  \App\TicketType  $ticketType
      * @return \Illuminate\Http\Response
      */
-    public function show(Ticket $ticket)
+    public function show(TicketType $ticketType)
     {
-        return $this->successResponse('success', Ticket::findOrFail($ticket->id));
+        return $this->successResponse('success', TicketType::findOrFail($ticketType->id));
     }
+
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Ticket  $ticket
+     * @param  \App\TicketType  $ticketType
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Ticket $ticket)
+    public function update(Request $request, TicketType $ticketType)
     {
         $validate = Validator::make($request->all(), [
-            'code' => 'required|string',
-            'ticket_type_id' => 'required|integer'
+            'name' => 'required|string'
         ]);
 
         if($validate->fails())
@@ -86,17 +82,27 @@ class TicketController extends Controller
 
         try{
             $payload = [
-                'code' => $request->input('code'),
-                'ticket_type_id' => $request->input('ticket_type_id')
+                'name' => $request->input('name')
             ];
 
-            $saveTicketType = Ticket::find($ticket->id)->update($payload);
-            if($saveTicketType) return $this->successResponse("Ticket Type created");
+            $updateTicketType = TicketType::find($ticketType->id)->update($payload);
+            if($updateTicketType) return $this->successResponse("success", $updateTicketType);
 
-            return $this->errorResponse("Ticket not updated");
+            return $this->errorResponse("Ticket type not updated");
         }
         catch(\Exception $exception){
             $this->errorResponse('Operation failed');
         }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\TicketType  $ticketType
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(TicketType $ticketType)
+    {
+        //
     }
 }

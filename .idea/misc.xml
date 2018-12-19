@@ -5,14 +5,10 @@
       <BehatSettings />
     </behat_settings>
   </component>
-  <component name="PhpProjectSharedConfiguration" php_language_level="7.1" />
   <component name="PhpUnit">
     <phpunit_settings>
       <PhpUnitSettings load_method="CUSTOM_LOADER" custom_loader_path="$USER_HOME$/composer.phar" phpunit_phar_path="" />
     </phpunit_settings>
-  </component>
-  <component name="ProjectDictionaryState">
-    <dictionary name="apple" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">

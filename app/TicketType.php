@@ -4,11 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Ticket extends Model
+class TicketType extends Model
 {
-    protected $fillable = ['code', 'ticket_type_id'];
+    protected $fillable = ['name'];
 
-    public function ticket_types(){
+    public function tickets(){
         return $this->belongsToMany(TicketType::class);
     }
 }
