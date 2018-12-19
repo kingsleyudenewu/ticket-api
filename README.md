@@ -16,7 +16,6 @@ An API that helps you to connect tickets with their ticket type
     - Create you database and set dname, username and password on the new .env file
     - Generate your laravel key
     - Run php artisan migrate
-    - Run php artisan db:seed to generate dummy datas for both countries, states and cities
     - Start your vouche pool app by running php artisan serve 
     - To run your <b>TEST</b> go to your console and type ./vendor/bin/phpunit
 </pre>
