@@ -9,6 +9,6 @@ class TicketType extends Model
     protected $fillable = ['name'];
 
     public function tickets(){
-        return $this->belongsToMany(TicketType::class);
+        return $this->belongsToMany(Ticket::class);
     }
 }

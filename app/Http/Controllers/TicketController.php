@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Ticket;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Validator;
 
 class TicketController extends Controller
@@ -93,8 +94,9 @@ class TicketController extends Controller
 
             $saveTicketType = Ticket::find($ticket->id)->update($payload);
             if($saveTicketType){
-                $saveTicketType->ticket_types()->attach($request->input('ticket_type_id'));
-                return $this->successResponse("Ticket Type created");
+                $ticket->ticket_types()->sync($request->input('ticket_type_id'));
+
+                return $this->successResponse("success");
 
             }
 
