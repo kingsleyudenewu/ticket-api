@@ -12,8 +12,7 @@ class TicketTableSeeder extends Seeder
     public function run()
     {
         $ticket_type = \App\TicketType::all();
-        factory(\App\Ticket::class, 5)->create()->each(function ($u) use ($ticket_type){
-//            $u->ticket_types()->save(factory($ticket_type->random(1))->make());
+        factory(\App\Ticket::class, 10)->create()->each(function ($u) use ($ticket_type){
             $u->ticket_types()->saveMany($ticket_type);
         });
     }
