@@ -44,6 +44,7 @@ class TicketController extends Controller
 
             $saveTicketType = Ticket::create($payload);
             if($saveTicketType){
+                $saveTicketType->ticket_types()->attach($request->input('ticket_type_id'));
                 return $this->successResponse("success");
             }
 
@@ -91,7 +92,11 @@ class TicketController extends Controller
             ];
 
             $saveTicketType = Ticket::find($ticket->id)->update($payload);
-            if($saveTicketType) return $this->successResponse("Ticket Type created");
+            if($saveTicketType){
+                $saveTicketType->ticket_types()->attach($request->input('ticket_type_id'));
+                return $this->successResponse("Ticket Type created");
+
+            }
 
             return $this->errorResponse("Ticket not updated");
         }
